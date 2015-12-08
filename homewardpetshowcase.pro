@@ -13,11 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    animallistmodel.cpp \
+    apimanager.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    animallistmodel.h \
+    apimanager.h
 
 FORMS    += mainwindow.ui
 
 DISTFILES += \
-    animal.qml
+    animalview.qml \
+    FindShelterId
