@@ -1,0 +1,4 @@
+To set your Petfinder API key create a new file in this folder called settings.txt. Paste your dev key as the first line.
+
+DevKey = 
+ShelterID

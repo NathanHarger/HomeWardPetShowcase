@@ -9,6 +9,8 @@ public:
     ApiManager();
     static void MakeApiCall();
     static AnimalListModel GetAnimals(QString shelterId, AnimalListModel::AnimalType animalType);
+private:
+
 };
 
 #endif // APIMANAGER_H

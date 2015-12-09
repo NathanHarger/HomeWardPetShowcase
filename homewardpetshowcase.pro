@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     animallistmodel.cpp \
-    apimanager.cpp
+    apimanager.cpp \
+    configuration.cpp
 
 HEADERS  += mainwindow.h \
     animallistmodel.h \
-    apimanager.h
+    apimanager.h \
+    configuration.h
 
 FORMS    += mainwindow.ui
 
