@@ -25,4 +25,4 @@ FORMS    += mainwindow.ui
 
 DISTFILES += \
     animalview.qml \
-    FindShelterId
+    FindShelterId.py
