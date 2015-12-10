@@ -7,10 +7,10 @@ GridView {
     model: AnimalListModel
     delegate: Item{
         Image{
-        source: model.animalImage; anchors.horizontalCenter: parent.horizontalCenter;
+        source: animalImage; anchors.horizontalCenter: parent.horizontalCenter;
         }
         Text{
-        text:model.animalName
+        text:animalName
         }
     }
 

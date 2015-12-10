@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     animallistmodel.cpp \
     apimanager.cpp \
-    configuration.cpp
+    configuration.cpp \
+    animal.cpp
 
 HEADERS  += mainwindow.h \
     animallistmodel.h \
     apimanager.h \
-    configuration.h
+    configuration.h \
+    animal.h
 
 FORMS    += mainwindow.ui
 

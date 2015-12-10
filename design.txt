@@ -1,0 +1,33 @@
+Simplest and least effecient. Requires network
+HTTP request
+  |
+  |json returned
+  v
+json
+  | 
+  |json parsed into animal objects 
+  v
+cat animalmodel
+and 
+dog animalmodel
+         
+Model that works with no internet. does not need to recreate objects every load.
+
+           No
+internet?------> use .json file. If not exists throw no internet error
+  |yes 
+  V
+HTTP request
+  |                              
+  V
+ json serialized(first time) -----------------------------------+ 
+                |                                               |
+                |                                               |
+                |                                               |
+                |                                               |
+                v                                               |
+  Diff run on  new json and file json                           |
+                |                                               |
+                |                                               |
+                V                                               v
+  Update json in file  and existing dog and cat objects (create if not existing)
