@@ -1,4 +1,4 @@
-Simplest and least effecient. Requires network
+ Simplest and least effecient. Requires network
 HTTP request
   |
   |json returned
