@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>animalview.qml</file>
+    </qresource>
+</RCC>

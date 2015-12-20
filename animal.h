@@ -2,6 +2,7 @@
 #define ANIMAL_H
 #include<string>
 #include <list>
+#include <QApplication>
 
 class Animal
 {
@@ -11,16 +12,20 @@ public:
         Dog
     };
 
-    Animal();
+
+    QString getName() const;
+    QString getImage() const;
+
+    Animal(QString name);
 private:
 
-    std::string shelterId;
-    std::string animalID;
-    std::string animalName;
+    QString shelterId;
+   QString animalID;
+    QString animalName;
 
     AnimalType animalType;
-    std::string animalDescription;
-    std::list<std::string> animalPhotos;
+    QString animalDescription;
+    std::list<QString> animalPhotos;
 };
 
 #endif // ANIMAL_H

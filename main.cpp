@@ -1,12 +1,32 @@
 #include "mainwindow.h"
-#include <QApplication>
+#include "animallistmodel.h"
+#include <animal.h>
+#include <QGuiApplication>
+#include<QApplication>
+#include<QtQml>
+#include<QtQuick>
+#include <qqmlengine.h>
+#include<QtQuick/QQuickItem>
+#include <QtQuick/qquickitem.h>
+#include <QtQuick/qquickview.h>
+
+
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
+    AnimalListModel model;
+    model.addAnimal(Animal("Wolf"));
+    model.addAnimal(Animal("Polar bear"));
+    model.addAnimal(Animal("Quoll"));
 
-    w.show();
+    QApplication app(argc, argv);
 
-    return a.exec();
-}
+    QQuickView view;
+      QQmlContext *ctxt = view.rootContext();
+
+      ctxt->setContextProperty("animalModel", &model);
+      view.setSource(QUrl("qrc:animalview.qml"));
+          view.show();
+
+       return app.exec();
+   }
