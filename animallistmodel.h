@@ -14,13 +14,14 @@ public:
     AnimalListModel(QObject* parent =0);
     int rowCount(const QModelIndex &parent=QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
-    void addAnimal( const Animal animal);
+    void addAnimal(const Animal &animal);
+
 protected:
     QHash<int, QByteArray> roleNames() const;
 
 private:
-    QList<Animal*> animals;
-   // std::vector<Animal*> animals;
+    QList<Animal> animals;
+   //std::vector<Animal*> animals;
     Animal::AnimalType animalType;
 
 };

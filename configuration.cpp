@@ -2,9 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include<string>
+#include "animal.h"
 using namespace std;
 Configuration::Configuration()
 {
+
+    //TODO add type of animals to config file
+
+
     fstream file;
 
     file.open("../conf/settings.txt");

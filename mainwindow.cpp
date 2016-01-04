@@ -1,5 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "animallistmodel.h"
+#include <qqmlengine.h>
+#include<QtQuick/QQuickItem>
+#include <QtQuick/qquickitem.h>
+#include <QtQuick/qquickview.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -7,10 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-}
 
+}
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+

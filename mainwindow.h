@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void createTabs();
 };
 
 #endif // MAINWINDOW_H

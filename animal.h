@@ -7,13 +7,14 @@
 class Animal
 {
 public:
+    static const QString animalTypeString[];
+
     enum AnimalType{
-        Cat,
+        Cat ,
         Dog
     };
 
-
-    QString getName() const;
+QString getName() const;
     QString getImage() const;
 
     Animal(QString name);

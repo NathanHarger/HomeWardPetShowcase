@@ -6,7 +6,7 @@
 class ApiManager
 {
 public:
-    ApiManager();
+
     static void MakeApiCall();
     static AnimalListModel GetAnimals(QString shelterId, Animal::AnimalType animalType);
 private:

@@ -1,7 +1,8 @@
 #include "apimanager.h"
 
-ApiManager::ApiManager()
-{
+static AnimalListModel GetAnimals(QString shelterId, Animal::AnimalType animalType){
+
+    QString animalTypeString = Animal::animalTypeString[animalType];
+
 
 }
-

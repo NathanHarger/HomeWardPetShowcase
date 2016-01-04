@@ -13,17 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     animallistmodel.cpp \
     apimanager.cpp \
     configuration.cpp \
-    animal.cpp
+    animal.cpp \
+    mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    animallistmodel.h \
+HEADERS  += animallistmodel.h \
     apimanager.h \
     configuration.h \
-    animal.h
+    animal.h \
+    mainwindow.h
 
 FORMS
 
@@ -31,5 +31,7 @@ DISTFILES +=
 
     FindShelterId.py
 
-RESOURCES += \
-    model.qrc
+RESOURCES += abstractitemmodel.qrc
+
+FORMS += \
+    mainwindow.ui
