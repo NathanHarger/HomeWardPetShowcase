@@ -1,3 +1,4 @@
+// Reads from qrc:/settings.txt and stores dev key, shelter id and animal types
 #ifndef READCONFIGURATION_H
 #define READCONFIGURATION_H
 #include <QApplication>

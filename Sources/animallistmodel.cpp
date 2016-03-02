@@ -11,7 +11,7 @@ AnimalListModel::AnimalListModel(QObject *parent) : QAbstractListModel(parent){
         return animals.size();
     }
 
-    void AnimalListModel::addAnimal( const Animal &animal)
+    void AnimalListModel::addAnimal(const Animal &animal)
     {
 
         // begin Insert Rows not working?

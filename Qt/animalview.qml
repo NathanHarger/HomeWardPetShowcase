@@ -5,9 +5,9 @@ Rectangle{
 TabView{
     anchors.fill:parent
 Repeater{
-    model: animalTypes
+    model: animalModels
 Tab{
-    title: modelData
+    title: modelData.Type
     Rectangle {
 
         GridView {
@@ -17,7 +17,7 @@ Tab{
             anchors.fill:parent
 
             cellWidth: parent.width/2; cellHeight: 200;
-            model: modelData + "Model"
+            model:modelData
         }
     }
  }
@@ -41,4 +41,10 @@ Component {
        }
    }
 }
+
+
+
+    ListModel{
+        id:animalTypeModel
+    }
 }
