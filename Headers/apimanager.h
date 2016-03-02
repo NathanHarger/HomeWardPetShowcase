@@ -1,7 +1,7 @@
 #ifndef APIMANAGER_H
 #define APIMANAGER_H
 #include <QApplication>
-#include <animallistmodel.h>
+#include "../Headers/animallistmodel.h"
 
 class ApiManager
 {

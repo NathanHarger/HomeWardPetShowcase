@@ -6,12 +6,14 @@ class Configuration
 {
 public:
     Configuration();
-
+    QStringList getAnimalTypes();
     string getDevKey();
     string getShelterID();
 private:
     string DevKey;
     string ShelterID;
+    QStringList AnimalTypes;
+
 };
 
 #endif // READCONFIGURATION_H

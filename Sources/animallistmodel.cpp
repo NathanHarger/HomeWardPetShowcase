@@ -1,4 +1,4 @@
-#include "animallistmodel.h"
+#include "../Headers/animallistmodel.h"
 static double itemHeight = 100;
 
 AnimalListModel::AnimalListModel(QObject *parent) : QAbstractListModel(parent){

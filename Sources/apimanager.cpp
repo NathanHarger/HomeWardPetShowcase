@@ -1,4 +1,4 @@
-#include "apimanager.h"
+#include "../Headers/apimanager.h"
 
 static AnimalListModel GetAnimals(QString shelterId, Animal::AnimalType animalType){
 

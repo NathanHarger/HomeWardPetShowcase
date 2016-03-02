@@ -1,6 +1,7 @@
-#include "animallistmodel.h"
-#include "mainwindow.h"
-#include <animal.h>
+#include "../Headers/animallistmodel.h"
+#include "../Headers/mainwindow.h"
+#include "../Headers/animal.h"
+#include "../Headers/configuration.h"
 #include <QGuiApplication>
 #include<QtQml>
 #include<QtQuick>
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
+    Configuration c;
 
     AnimalListModel model;
 
@@ -34,15 +36,13 @@ int main(int argc, char *argv[])
     model.addAnimal( Animal("Quoll"));
 
 
-//MainWindow main;
-
-//main.show();
 
     QQuickView view;
-   view.setResizeMode(QQuickView::SizeRootObjectToView);
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
     QQmlContext *ctxt = view.rootContext();
 
-    ctxt->setContextProperty("animalTypes", Animal::animalTypeString);
+
+    ctxt->setContextProperty("animalTypes", c.getAnimalTypes());
 
     ctxt->setContextProperty("dogModel", &model);
     ctxt->setContextProperty("catModel", &cats);

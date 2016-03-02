@@ -1,26 +1,32 @@
-#include "configuration.h"
+#include "../Headers/configuration.h"
 #include <iostream>
 #include <fstream>
-#include<string>
-#include "animal.h"
+#include <QFile>
+#include <string>
+#include <QTextStream>
+#include "../Headers/animal.h"
 using namespace std;
 Configuration::Configuration()
-{
+{ 
+   QFile file("://settings.txt");
+   if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+           return;
+    QTextStream in(&file);
 
-    //TODO add type of animals to config file
+    QString devkey = in.readLine();
+
+    // read the shelter id from the config file
+    QString shelterid = in.readLine();
+
+    // read the animal types from the config file
+    QString typeString = in.readLine();
+        AnimalTypes = typeString.split(",");
+
+    file.close();
+    }
 
 
-    fstream file;
-
-    file.open("../conf/settings.txt");
-    string devkey;
-    char* devkeyCharpoint = &devkey[0];
-    getline(file,devkey);
-    this->DevKey = strtok(devkeyCharpoint,"=")[1];
-    string shelterid;
-    char *shelterCharPoint = &shelterid[0];
-    getline(file, shelterid);
-    this->ShelterID = strtok(shelterCharPoint,"=")[1];
-
+QStringList Configuration::getAnimalTypes(){
+    return AnimalTypes;
 }
 

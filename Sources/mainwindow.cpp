@@ -1,6 +1,6 @@
-#include "mainwindow.h"
+#include "../Headers/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "animallistmodel.h"
+#include "../Headers/animallistmodel.h"
 #include <qqmlengine.h>
 #include<QtQuick/QQuickItem>
 #include <QtQuick/qquickitem.h>

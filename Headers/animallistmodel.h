@@ -2,7 +2,7 @@
 #define ANIMALLISTMODEL_H
 #include <QApplication>
 #include <QAbstractListModel>
-#include<animal.h>
+#include "animal.h"
 class AnimalListModel :public QAbstractListModel
 {
 
