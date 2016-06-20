@@ -13,6 +13,14 @@ ModelManager::ModelManager(QStringList animalTypes)
 // m.modelName must be unique
 void ModelManager::addModel(AnimalListModel* m)
 {
+    for (int i = 0; i < models.length(); i++)
+    {
+        if (models.at(i)->getModelName() == m->getModelName())
+        {
+            return;
+        }
+    }
+    models.append(m);
 }
 
 // get model corrisponding to s
@@ -27,5 +35,13 @@ QList<AnimalListModel*> ModelManager::getModels()
 
 void ModelManager::addAnimal(const Animal &animal, QString modelName)
 {
+    for (int i = 0; i < models.length(); i++)
+    {
+        if (models.at(i)->getModelName() == modelName)
+        {
+            models.at(i)->addAnimal(animal);
+        }
+    }
+
 }
 

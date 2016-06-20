@@ -11,7 +11,8 @@ public:
 
     enum AnimalType{
         Cat ,
-        Dog
+        Dog,
+        Pet
     };
 
 QString getName() const;

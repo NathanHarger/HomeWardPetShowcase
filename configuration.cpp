@@ -1,10 +1,10 @@
-#include "../Headers/configuration.h"
+#include "configuration.h"
 #include <iostream>
 #include <fstream>
 #include <QFile>
 #include <string>
 #include <QTextStream>
-#include "../Headers/animal.h"
+#include "animal.h"
 using namespace std;
 Configuration::Configuration()
 { 

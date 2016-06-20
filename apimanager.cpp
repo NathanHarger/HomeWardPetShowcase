@@ -1,8 +1,1 @@
-#include "../Headers/apimanager.h"
-
-static AnimalListModel GetAnimals(QString shelterId, Animal::AnimalType animalType){
-
-    QString animalTypeString = Animal::animalTypeString[animalType];
-
-
-}
+#include "apimanager.h"

@@ -1,46 +1,74 @@
-#include "../Headers/animallistmodel.h"
-static double itemHeight = 100;
+#include "animallistmodel.h"
 
-AnimalListModel::AnimalListModel(QObject *parent) : QAbstractListModel(parent){
+
+int AnimalListModel::rowCount(const QModelIndex &parent) const{
+    if (parent.isValid())
+    {
+        return animals.length();
+    }
+    return 0;
+}
+
+AnimalListModel::AnimalListModel(QString name)
+{
+    this->modelName = name;
+}
+
+AnimalListModel::AnimalListModel(QString name , QList<Animal> animals)
+{
+    this->modelName = name;
+
+    for (int i =0 ; i < animals.length(); i++)
+    {
+        addAnimal(animals.at(i));
+    }
+
 
 }
 
+void AnimalListModel::setModelName(QString){
 
-    int AnimalListModel::rowCount(const QModelIndex &parent) const{
-        Q_UNUSED(parent);
-        return animals.size();
-    }
+}
 
-    void AnimalListModel::addAnimal(const Animal &animal)
-    {
+QString AnimalListModel::getModelName() const
+{
+    return modelName;
+}
+
+void AnimalListModel::addAnimal( const Animal &animal)
+{
 
         // begin Insert Rows not working?
-        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        beginInsertRows(QModelIndex(), rowCount(), rowCount()+1);
         animals << animal;
 
         endInsertRows();
-    }
+}
+
+
 
 //![0]
 
-    QHash<int, QByteArray> AnimalListModel::roleNames() const {
-        QHash<int, QByteArray> roles;
+QHash<int, QByteArray> AnimalListModel::roleNames() const {
+    QHash<int, QByteArray> roles;
 
-        roles[NameRole] = "name";
-        roles[ImageRole] = "image";
-        return roles;
-    }
+    roles[NameRole] = "name";
+    roles[ImageRole] = "image";
+    return roles;
+}
 
-    QVariant AnimalListModel::data(const QModelIndex &index, int role) const{
-        if (index.row() < 0 || index.row() >= animals.size())
-            return QVariant();
-
-        const Animal animal = animals.at(index.row());
-        if (role == ImageRole)
-            return animal.getImage();
-        else if (role == NameRole)
-            return animal.getName();
+QVariant AnimalListModel::data(const QModelIndex &index, int role) const{
+    if (index.row() < 0 || index.row() >= animals.size())
         return QVariant();
-    }
+
+    const Animal animal = animals.at(index.row());
+    if (role == ImageRole)
+        return animal.getImage();
+    else if (role == NameRole)
+        return animal.getName();
+    return QVariant();
+}
+
+
 
 

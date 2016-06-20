@@ -1,8 +1,8 @@
-#include "../Headers/animallistmodel.h"
-#include "../Headers/mainwindow.h"
-#include "../Headers/animal.h"
-#include "../Headers/configuration.h"
-#include "../Headers/modelmanager.h"
+#include "animallistmodel.h"
+#include "modelmanager.h"
+#include "mainwindow.h"
+#include "animal.h"
+#include "configuration.h"
 #include <QGuiApplication>
 #include<QtQml>
 #include<QtQuick>
@@ -10,15 +10,10 @@
 #include<QtQuick/QQuickItem>
 #include <QtQuick/qquickitem.h>
 #include <QtQuick/qquickview.h>
+#include <QQuickWidget>
 
-class DataObject : public QObject
-{
-    Q_OBJECT
+void setupUI(QList<AnimalListModel*> models);
 
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(AnimalListModel color READ color WRITE setColor NOTIFY colorChanged)
-
-};
 
 int main(int argc, char *argv[])
 {
@@ -28,28 +23,40 @@ int main(int argc, char *argv[])
     // setup configuration
     Configuration c;
 
-    ModelManager m;
-    AnimalListModel model;
 
-   AnimalListModel* cats = m.getModel("cats");
-
-   if(cats != NULL){
-    cats->addAnimal( Animal("Cheese Pizza"));
-    cats->addAnimal( Animal("Mocha"));
-    cats->addAnimal( Animal("Bob"));
-    }
+   ModelManager* models = new ModelManager(c.getAnimalTypes());
 
 
+   models->addAnimal( Animal("Cheese Pizza"),"cat");
+   models->addAnimal( Animal("C1"),"cat");
+   models->addAnimal( Animal("3"),"cat");
+   models->addAnimal( Animal("C4za"),"cat");
 
-    QQuickView view;
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    QQmlContext *ctxt = view.rootContext();
+    setupUI(models->getModels());
 
-    // add list of animals from config to qml animalTypes property
-    ctxt->setContextProperty("animalTypes", c.getAnimalTypes());
-
-    view.setSource(QUrl("qrc:animalview.qml"));
-    view.show();
 
     return app.exec();
    }
+
+void setupUI(QList<AnimalListModel*> models){
+   QTabWidget* w = new QTabWidget();
+
+    for (int i =0 ; i < models.length(); i++){
+        //QQuickView view;
+        QQuickView* view = new QQuickView();
+
+        view->engine()->rootContext()->setContextProperty("animalModel", models.at(i));
+
+        view->setSource(QUrl("qrc:/animalview.qml"));
+        // add list of animals from config to qml animalTypes property
+
+
+        w->addTab( view,models.at(i)->getModelName());
+
+        //w->show();
+       //view->show();
+
+    }
+    w->show();
+
+}
