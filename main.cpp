@@ -37,13 +37,18 @@ int main(int argc, char *argv[])
 
     return app.exec();
    }
-
+http://doc.qt.io/qt-5/qqmlcomponent.html
 void setupUI(QList<AnimalListModel*> models){
    QTabWidget* w = new QTabWidget();
 
     for (int i =0 ; i < models.length(); i++){
         //QQuickView view;
         QQuickView* view = new QQuickView();
+		QQmlEngine *engine = new QQmlEngine;
+		QQmlComponent component(engine, QUrl("qrc:/animalview.qml")
+		
+		QObject *myObject = component.create();
+		QQuickItem *item = qobject_cast<QQickItem*>(myObject);
 
         view->engine()->rootContext()->setContextProperty("animalModel", models.at(i));
 
