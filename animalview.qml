@@ -1,34 +1,37 @@
+// not repeating through the model to display all animals
 import QtQuick 2.0
+import QtQuick.Controls 1.4
 MouseArea {
-
-
-GridView {
-    focus: true
-    delegate: appDelegate
-    id :grid
     anchors.fill:parent
-    cellWidth: 80; cellHeight: 80;
-    model: animalModel
+    Grid {
+            x: 5; y: 5
+            rows: 5; columns: 5; spacing: 10
+        focus: true
+Repeater{
+    model:animalModel
+
+         Component
+         {
+             id: appDelegate
+
+             Item {
+                width: 200; height: 200
+
+                 Image {
+                     //y: 20; anchors.horizontalCenter: parent.horizontalCenter
+                     source: image
+                 }
+                 Text {
+                     text: name
+                 }
+         }
+        }
+    }
+
+
+
 
 }
 
 
-
-Component {
-       id: appDelegate
-
-       Item {
-           width: 100; height: 100
-
-           Image {
-               id:  image
-               y: 20; anchors.horizontalCenter: parent.horizontalCenter
-               source: image
-           }
-           Text {
-               id: name
-               text: name
-           }
-       }
-   }
 }

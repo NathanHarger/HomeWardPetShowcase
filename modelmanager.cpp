@@ -24,8 +24,15 @@ void ModelManager::addModel(AnimalListModel* m)
 }
 
 // get model corrisponding to s
-AnimalListModel ModelManager::getModel(QString s)
+AnimalListModel* ModelManager::getModel(QString s)
 {
+    for (int i = 0; i < models.length(); i++)
+    {
+        if (models.at(i)->getModelName() == s)
+        {
+            return models.at(i);
+        }
+    }
 }
 
 QList<AnimalListModel*> ModelManager::getModels()

@@ -13,7 +13,7 @@ public:
     void addModel(AnimalListModel* m);
 
     // get model corrisponding to s
-    AnimalListModel getModel(QString s);
+    AnimalListModel* getModel(QString s);
 
     // get all models as a qlist of animallistmodel*
     QList<AnimalListModel*> getModels();

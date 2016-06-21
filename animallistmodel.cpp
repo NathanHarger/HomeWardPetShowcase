@@ -2,11 +2,9 @@
 
 
 int AnimalListModel::rowCount(const QModelIndex &parent) const{
-    if (parent.isValid())
-    {
+
         return animals.length();
-    }
-    return 0;
+
 }
 
 AnimalListModel::AnimalListModel(QString name)
