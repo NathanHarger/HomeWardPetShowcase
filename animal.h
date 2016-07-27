@@ -31,6 +31,7 @@ private:
     QString adoptionStatus
     bool mix;
     QString sex;
+    QString size
 };
 
 #endif // ANIMAL_H
