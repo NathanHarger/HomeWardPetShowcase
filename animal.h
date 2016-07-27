@@ -9,11 +9,7 @@ class Animal
 public:
     static const QString animalTypeString[];
 
-    enum AnimalType{
-        Cat ,
-        Dog,
-        Pet
-    };
+  
 
 QString getName() const;
     QString getImage() const;
@@ -28,6 +24,13 @@ private:
     AnimalType animalType;
     QString animalDescription;
     std::list<QString> animalPhotos;
+    QStringList<QString> options;
+    QStringList<QString> breeds;
+    QString age;
+    QString AnimalType;
+    QString adoptionStatus
+    bool mix;
+    QString sex;
 };
 
 #endif // ANIMAL_H
