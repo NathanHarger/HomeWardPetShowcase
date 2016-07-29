@@ -17,6 +17,7 @@ public:
 
 QString getName() const;
     QString getImage() const;
+    QString getDesc() const;
 
     Animal(QString name);
 private:

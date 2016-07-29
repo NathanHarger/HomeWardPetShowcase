@@ -52,6 +52,7 @@ QHash<int, QByteArray> AnimalListModel::roleNames() const {
 
     roles[NameRole] = "name";
     roles[ImageRole] = "image";
+    roles[DescriptionRole] = "desc";
     return roles;
 }
 
@@ -64,6 +65,8 @@ QVariant AnimalListModel::data(const QModelIndex &index, int role) const{
         return animal.getImage();
     else if (role == NameRole)
         return animal.getName();
+    else if (role == DescriptionRole)
+        return animal.getDesc();
     return QVariant();
 }
 

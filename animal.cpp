@@ -15,3 +15,7 @@ QString Animal::getName() const{
 QString Animal::getImage() const{
     return "";
 }
+
+QString Animal::getDesc() const{
+    return this->animalDescription;
+}

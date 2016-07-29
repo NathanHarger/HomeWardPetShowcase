@@ -2,14 +2,26 @@
 #ifndef APIMANAGER_H
 #define APIMANAGER_H
 #include <QApplication>
+#include <QtNetwork>
+#include <QJsonDocument>
 #include "animallistmodel.h"
+#include "modelmanager.h"
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QObject>
 
-class ApiManager
+
+ class ApiManager: public QObject
 {
-public:
+ public:
+      void populateModel(ModelManager* );
+     QNetworkAccessManager *manager;
+ private slots:
 
+   void downloadFinished(QNetworkReply*);
+    private:
+   Q_OBJECT
 
-private:
 
 };
 

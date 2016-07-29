@@ -2,6 +2,7 @@
 #include "modelmanager.h"
 #include "mainwindow.h"
 #include "animal.h"
+#include "apimanager.h"
 #include "configuration.h"
 #include <QGuiApplication>
 #include<QtQml>
@@ -22,10 +23,8 @@ int main(int argc, char *argv[])
 
     // setup configuration
     Configuration c;
-
-
    ModelManager* models = new ModelManager(c.getAnimalTypes());
-
+    ApiManager am;
 
    models->addAnimal( Animal("Cheese Pizza"),"cat");
    models->addAnimal( Animal("C1"),"cat");
@@ -34,29 +33,23 @@ int main(int argc, char *argv[])
 
    models->addAnimal(Animal("Nemo"),"dog");
     setupUI(models->getModels());
-
-
+    am.populateModel(models);
     return app.exec();
    }
 void setupUI(QList<AnimalListModel*> models){
    QTabWidget* w = new QTabWidget();
 
     for (int i =0 ; i < models.length(); i++){
-        //QQuickView view;
+
         QQuickWidget* view = new QQuickWidget();
 
-
+        // add list of animals from config to qml animalTypes property
         view->engine()->rootContext()->setContextProperty("animalModel", models.at(i));
 
-        view->setSource(QUrl("qrc:/animalview.qml"));
-        // add list of animals from config to qml animalTypes property
 
+        view->setSource(QUrl("qrc:/shelterview.qml"));
 
         w->addTab( view,models.at(i)->getModelName());
-
-        //w->show();
-       //view->show();
-
     }
     w->show();
 

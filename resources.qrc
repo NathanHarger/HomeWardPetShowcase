@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>animalview.qml</file>
+        <file>shelterview.qml</file>
         <file>settings.txt</file>
+        <file>animalview.qml</file>
     </qresource>
 </RCC>
