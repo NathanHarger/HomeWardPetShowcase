@@ -7,7 +7,6 @@
 class Animal
 {
 public:
-    static const QString animalTypeString[];
 
   
 
@@ -22,17 +21,16 @@ private:
    QString animalID;
     QString animalName;
 
-    AnimalType animalType;
     QString animalDescription;
     std::list<QString> animalPhotos;
-    QStringList<QString> options;
-    QStringList<QString> breeds;
+    QStringList options;
+    QStringList breeds;
     QString age;
     QString AnimalType;
-    QString adoptionStatus
+    QString adoptionStatus;
     bool mix;
     QString sex;
-    QString size
+    QString size;
 };
 
 #endif // ANIMAL_H

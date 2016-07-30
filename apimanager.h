@@ -9,6 +9,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QObject>
+#include <QXmlStreamReader>
 
 
  class ApiManager: public QObject
@@ -19,7 +20,9 @@
  private slots:
 
    void downloadFinished(QNetworkReply*);
-    private:
+   private:
+    ModelManager modelManager;
+    void parseXML(QByteArray, ModelManager*);
    Q_OBJECT
 
 

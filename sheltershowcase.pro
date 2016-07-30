@@ -8,6 +8,7 @@ QT       += core gui
 QT         += qml quick
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 QT += quickwidgets
+QT += network
 
 TARGET = sheltershowcase
 TEMPLATE = app
@@ -34,7 +35,8 @@ DISTFILES +=
 
     FindShelterId.py
 
-RESOURCES += abstractitemmodel.qrc
+RESOURCES += \
+    resources.qrc
 
 FORMS += \
     mainwindow.ui
