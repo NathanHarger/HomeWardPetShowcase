@@ -21,8 +21,8 @@
 
    void downloadFinished(QNetworkReply*);
    private:
-    ModelManager modelManager;
-    void parseXML(QByteArray, ModelManager*);
+    ModelManager* modelManager;
+    void parseJSON(QByteArray, ModelManager*);
    Q_OBJECT
 
 

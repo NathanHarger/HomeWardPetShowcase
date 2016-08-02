@@ -4,11 +4,11 @@
 #include <list>
 #include <QApplication>
 
-class Animal
+             class Animal
 {
 public:
 
-  
+  Animal();
 
 QString getName() const;
     QString getImage() const;

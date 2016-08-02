@@ -5,7 +5,10 @@ Animal::Animal(QString name)
 
 this->animalName = name;
 }
+Animal::Animal()
+{
 
+}
 
 QString Animal::getName() const{
     return this->animalName;
