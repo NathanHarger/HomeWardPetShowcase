@@ -22,7 +22,13 @@
    void downloadFinished(QNetworkReply*);
    private:
     ModelManager* modelManager;
-    void parseJSON(QByteArray, ModelManager*);
+
+    QString getJsonAttribute(QString, QJsonObject);
+    QJsonArray parseJSON(QByteArray, ModelManager*);
+    void createAnimals(QJsonArray);
+    QStringList getPhotosFromJson(QJsonObject);
+    QStringList getOptionsFromJson(QJsonObject);
+    QStringList getBreedsFromJson(QJsonObject);
    Q_OBJECT
 
 

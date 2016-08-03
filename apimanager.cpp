@@ -16,47 +16,134 @@ void ApiManager::populateModel(ModelManager* modelManager)
 void ApiManager::downloadFinished(QNetworkReply *reply) //this slot called when we have responce
 {
 
-    QByteArray json = reply->readAll(); //we read result and print it(also you can save it in some variable and use in code
+    QByteArray jsonDoc = reply->readAll(); //we read result and print it(also you can save it in some variable and use in code
    // qDebug() << json;
-    parseJSON(json, modelManager);
+    QJsonArray petJson = parseJSON(jsonDoc , modelManager);
+    createAnimals(petJson);
 }
 
-void ApiManager::parseJSON(QByteArray json, ModelManager* m)
+void ApiManager::createAnimals(QJsonArray petArray)
 {
-      QJsonDocument jsonDoc =  QJsonDocument::fromJson(json);
+
+    for (int i = 0; i < petArray.size(); i++)
+    {
+        Animal curr;
+        QJsonObject currentJsonPet = petArray.at(i).toObject();
+
+        //read options
+        curr.setOptions(getOptionsFromJson( currentJsonPet));
+
+        //read status
+        curr.setStatus(getJsonAttribute("status", currentJsonPet).at(0));
+
+        //read age
+        curr.setAge(getJsonAttribute("age", currentJsonPet));
+
+        // read media
+        curr.setMedia(getPhotosFromJson( currentJsonPet)); //NO
+
+        // read id
+        curr.setId(getJsonAttribute("id", currentJsonPet));
+
+
+        // read breeds
+        curr.setBreeds(getBreedsFromJson( currentJsonPet)); //NO
+
+
+        // read name
+        curr.setName(getJsonAttribute("name", currentJsonPet));
+
+        // read sex
+        curr.setSex(getJsonAttribute("sex", currentJsonPet));
+
+        // read description
+        curr.setDesc(getJsonAttribute("description", currentJsonPet));
+
+        // read mix
+        curr.setMix(getJsonAttribute("mix", currentJsonPet));
+
+        // read animal type
+        curr.setType(getJsonAttribute("animal", currentJsonPet));
+        this->modelManager->addAnimal(curr, curr.getType());
+    }
+}
+
+QJsonArray ApiManager::parseJSON(QByteArray json, ModelManager* m)
+{
+    QJsonDocument jsonDoc =  QJsonDocument::fromJson(json);
     QJsonObject doc = jsonDoc.object();
-    QJsonObject::Iterator iter = doc.find("petfinder");
-
-    QJsonValueRef petFinder = iter.value();
-    QJsonObject petFinderObject = petFinder.toObject();
-    QJsonObject petsObject = petFinderObject.find("pets").value().toObject();
+    QJsonObject petFinder = doc.find("petfinder").value().toObject();
+    QJsonObject petsObject = petFinder.find("pets").value().toObject();
     QJsonArray petsArray = petsObject.find("pet").value().toArray();
- //   QJsonArray petsArray = petfinderObject.find("pets");
+    return petsArray;
+}
 
-       // QXmlStreamReader xmlReader(xml);
+// returns an attribute from an object thas has only one value
+QString ApiManager::getJsonAttribute(QString attribute, QJsonObject jsonObject)
+{
+    QStringList result;
+    QJsonValueRef val = jsonObject.find(attribute).value();
+    if(val.isArray())
+    {
+        return ""; // inner json is an array
+    }
+    QJsonObject obj = val.toObject();
+    if (obj.contains("$t"))
+        return obj.find("$t").value().toString();
+    return ""; // inner json is a complex object like breeds
+}
 
 
-       // xmlReader.readElementText(); //start reading inside petfinder element
-         //QStringRef name = xmlReader.name();
-       //  qDebug() << name.string();
-       // xmlReader.skipCurrentElement(); // skip header element
-       // xmlReader.readNext(); // start reading inside pets element
-       // qDebug() << xmlReader.name();
-     /// /  if (xmlReader.hasError()) {
-     //  /        qDebug() << "Error";
-         }
-       // while (!xmlReader.isEndDocument())
-    //    {
-       //     Animal current;
+QStringList ApiManager::getPhotosFromJson(QJsonObject object)
+{
+    QStringList result;
+    QJsonObject mediaObject = object.find("media").value().toObject();
+   QJsonObject photosObject = mediaObject.find("photos").value().toObject();
 
-        //    while (!xmlReader.isEndElement()){
-//
-     //               QString name = xmlReader.name().toString();
-//
-        //    xmlReader.readNext();
-      //          }
+    QJsonArray photoArray = photosObject.find("photo").value().toArray();
+    for (int i = 0; i < photoArray.size(); i++)
+    {
 
-            // animal has  been read in
-  //      }
-//
-//}
+        QJsonObject currentObject = photoArray.at(i).toObject();
+
+        // skip photos that are not the largest size
+        if (!(currentObject.find("@size").value().toString() == "x"))
+        {
+            continue;
+        }
+        else
+        {
+            result += currentObject.find("$t").value().toString();
+        }
+    }
+    return result;
+}
+
+QStringList ApiManager::getOptionsFromJson(QJsonObject object)
+{
+    QStringList result;
+    QJsonObject innerObject = object.find("options").value().toObject();
+    QJsonArray optionArray = innerObject.find("option").value().toArray();
+    for (int i = 0; i < optionArray.size(); i++)
+    {
+        QJsonObject option = optionArray.at(i).toObject();
+        QString optionString = option.find("$t").value().toString();
+        result += optionString;
+    }
+    return result;
+}
+
+QStringList ApiManager::getBreedsFromJson(QJsonObject object)
+{
+    QStringList result;
+    QJsonObject innerObject = object.find("breeds").value().toObject();
+
+    QJsonArray breedArray = innerObject.find("breed").value().toArray();
+    for (int i = 0; i < breedArray.size(); i++)
+    {
+        QJsonObject breed = breedArray.at(i).toObject();
+        QString breedString = breed.find("$t").value().toString();
+        result += breedString;
+    }
+    return result;
+}

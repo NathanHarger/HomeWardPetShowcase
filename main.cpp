@@ -25,17 +25,13 @@ int main(int argc, char *argv[])
     Configuration c;
    ModelManager* models = new ModelManager(c.getAnimalTypes());
     ApiManager am;
-
-   models->addAnimal( Animal("Cheese Pizza"),"cat");
-   models->addAnimal( Animal("C1"),"cat");
-   models->addAnimal( Animal("3"),"cat");
-   models->addAnimal( Animal("C4za"),"cat");
-
-   models->addAnimal(Animal("Nemo"),"dog");
     setupUI(models->getModels());
     am.populateModel(models);
+
     return app.exec();
    }
+
+
 void setupUI(QList<AnimalListModel*> models){
    QTabWidget* w = new QTabWidget();
 

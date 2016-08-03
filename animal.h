@@ -13,7 +13,18 @@ public:
 QString getName() const;
     QString getImage() const;
     QString getDesc() const;
-
+    QString getType() const;
+    void setOptions(QStringList);
+   void setStatus(QString);
+   void setAge(QString);
+    void setMedia(QStringList);
+   void setId(QString);
+   void setBreeds(QStringList);
+   void setName(QString);
+   void setSex(QString);
+   void setDesc(QString);
+   void setMix(QString);
+   void setType(QString);
     Animal(QString name);
 private:
 
@@ -22,11 +33,11 @@ private:
     QString animalName;
 
     QString animalDescription;
-    std::list<QString> animalPhotos;
+    QStringList animalPhotos;
     QStringList options;
     QStringList breeds;
     QString age;
-    QString AnimalType;
+    QString animalType;
     QString adoptionStatus;
     bool mix;
     QString sex;

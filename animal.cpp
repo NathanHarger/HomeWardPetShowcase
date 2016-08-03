@@ -15,9 +15,70 @@ QString Animal::getName() const{
 }
 
 QString Animal::getImage() const{
-    return "";
+    if (animalPhotos.size() >= 1)
+    return this->animalPhotos.at(0);
+    else
+        return "";
 }
+
 
 QString Animal::getDesc() const{
     return this->animalDescription;
+}
+
+QString Animal::getType() const
+{
+    return this->animalType;
+}
+
+
+void Animal::setOptions(QStringList options)
+{
+    this->options = options;
+}
+
+
+void Animal::setStatus(QString status)
+{
+    adoptionStatus = status;
+}
+void Animal::setAge(QString age)
+{
+    this->age = age;
+}
+
+void Animal::setMedia(QStringList media)
+{
+    this->animalPhotos = media;
+}
+void Animal::setId(QString id)
+{
+    this->animalID = id;
+}
+void Animal::setBreeds(QStringList breeds)
+{
+    this->breeds  = breeds;
+}
+void Animal::setName(QString name)
+{
+    animalName = name;
+}
+void Animal::setSex(QString gender)
+{
+ sex = gender;
+}
+void Animal::setDesc(QString desc)
+{
+    this->animalDescription = desc;
+}
+void Animal::setMix(QString mixString)
+{
+    mix = mixString == "yes";
+
+
+
+}
+void Animal::setType(QString type)
+{
+    animalType = type;
 }
