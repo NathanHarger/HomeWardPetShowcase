@@ -19,6 +19,8 @@ public:
     QList<AnimalListModel*> getModels();
 
     void addAnimal(const Animal &animal, QString modelName);
+    void saveModelsToDisk(QString filename);
+
 
 private:
     QList< AnimalListModel*> models;

@@ -13,18 +13,27 @@ Configuration::Configuration()
            return;
     QTextStream in(&file);
 
-    QString devkey = in.readLine();
+     devkey = in.readLine();
 
     // read the shelter id from the config file
-    QString shelterid = in.readLine();
+     shelterid = in.readLine();
 
-    // read the animal types from the config file
+     // read the animal types from the config file
     QString typeString = in.readLine();
         AnimalTypes = typeString.split(",");
 
     file.close();
     }
 
+QString Configuration::getDevKey()
+{
+    return this->devkey;
+}
+
+QString Configuration::getShelterID()
+{
+    return this->shelterid;
+}
 
 QStringList Configuration::getAnimalTypes(){
     return AnimalTypes;

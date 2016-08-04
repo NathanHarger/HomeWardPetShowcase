@@ -35,6 +35,11 @@ AnimalListModel* ModelManager::getModel(QString s)
     }
 }
 
+
+
+
+
+
 QList<AnimalListModel*> ModelManager::getModels()
 {
     return models;

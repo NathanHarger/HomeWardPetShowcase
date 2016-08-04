@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
    ModelManager* models = new ModelManager(c.getAnimalTypes());
     ApiManager am;
     setupUI(models->getModels());
-    am.populateModel(models);
+     am.populateModel(models, c.getShelterID(), c.getDevKey());
 
     return app.exec();
    }

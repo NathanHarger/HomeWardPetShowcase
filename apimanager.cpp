@@ -1,16 +1,38 @@
 #include "apimanager.h"
 
 
-void ApiManager::populateModel(ModelManager* modelManager)
+void ApiManager::populateModel(ModelManager* modelManager, QString shelter, QString devKey)
 {
+    QNetworkConfigurationManager networkConfM;
+
+
     this->modelManager = modelManager;
-    manager = new QNetworkAccessManager(this);
 
-   connect(manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(downloadFinished(QNetworkReply*)));
+    if (!networkConfM.isOnline())
+    {
+        manager = new QNetworkAccessManager(this);
+        connect(manager, SIGNAL(finished(QNetworkReply*)),
+                 this, SLOT(downloadFinished(QNetworkReply*)));
+
+        QString apiUrl = "http://api.petfinder.com/shelter.getPets?key=" + devKey + "&id=" + shelter + "&format=json";
+        manager->get(QNetworkRequest(QUrl(apiUrl)));
+
+    } else {
+        // if there is no internet
+        QFile file(QCoreApplication::applicationDirPath() +     "petJson");
+
+        file.open(file.ReadOnly);
+        QDataStream in(&file);   // we will serialize the data into the file
+
+        QString binaryRep = in.device()->readAll();
 
 
-   manager->get(QNetworkRequest(QUrl("http://api.petfinder.com/shelter.getPets?key=5091404606bbe6df399563fdb6b54cff&id=WA109&format=json")));
+        qDebug() << binaryRep;
+        //QJsonDocument save = QJsonDocument::fromBinaryData(binaryRep);
+       // QJsonArray oldPets = save.array();
+       //this->createAnimals(oldPets);
+    }
+
 
 }
 void ApiManager::downloadFinished(QNetworkReply *reply) //this slot called when we have responce
@@ -18,12 +40,25 @@ void ApiManager::downloadFinished(QNetworkReply *reply) //this slot called when 
 
     QByteArray jsonDoc = reply->readAll(); //we read result and print it(also you can save it in some variable and use in code
    // qDebug() << json;
+
+
     QJsonArray petJson = parseJSON(jsonDoc , modelManager);
     createAnimals(petJson);
+    QJsonDocument save(petJson);
+    QByteArray binaryRepresentation = save.toBinaryData();
+
+
+    QFile file(QCoreApplication::applicationDirPath() +     "petJson");
+    file.open(QIODevice::WriteOnly);
+    QDataStream out(&file);
+    out.writeBytes(binaryRepresentation, binaryRepresentation.size());
+
+
 }
 
 void ApiManager::createAnimals(QJsonArray petArray)
 {
+
 
     for (int i = 0; i < petArray.size(); i++)
     {

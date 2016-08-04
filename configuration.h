@@ -8,11 +8,11 @@ class Configuration
 public:
     Configuration();
     QStringList getAnimalTypes();
-    string getDevKey();
-    string getShelterID();
+    QString getDevKey();
+    QString getShelterID();
 private:
-    string DevKey;
-    string ShelterID;
+    QString devkey;
+    QString shelterid;
     QStringList AnimalTypes;
 
 };

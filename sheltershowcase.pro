@@ -12,6 +12,7 @@ QT += network
 
 TARGET = sheltershowcase
 TEMPLATE = app
+INCLUDEPATH += .
 
 
 SOURCES +=animal.cpp \

@@ -15,7 +15,7 @@
  class ApiManager: public QObject
 {
  public:
-      void populateModel(ModelManager* );
+      void populateModel(ModelManager* , QString, QString);
      QNetworkAccessManager *manager;
  private slots:
 
