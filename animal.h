@@ -3,7 +3,6 @@
 #include<string>
 #include <list>
 #include <QApplication>
-
              class Animal
 {
 public:

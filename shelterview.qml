@@ -4,31 +4,34 @@ import QtQuick.Controls 1.4
 
 
 
-Rectangle{
 
-    GridView{
-        width: 1000; height:1000;
-        id:grid
-       cellWidth:300; cellHeight:300
+        Item{
+
+        id:shelter
+
+        MouseArea{
+           height:mainView.cellHeight; width:mainView.cellWidth;
+            onClicked: {
+
+                mainLoader.source="animalview.qml"
+                animalModel = index;
+            }
 
 
+        }
 
-       // orientation: ListView.Horizontal
-        model:animalModel
-        delegate: Rectangle
-       {
 
         Image {
 
-                anchors.centerIn:Image.AlignHCenter
-                width:grid.cellWidth; height:grid.cellHeight -15
+                width:mainView.cellWidth; height:mainView.cellHeight -15
 
                 fillMode: Image.PreserveAspectFit
 
                 source: image
 
         }
-                Text{ y: grid.cellHeight -15
+                Text{
+                    y: 300 -15
                     text: name }
 
 
@@ -37,10 +40,14 @@ Rectangle{
 
 
 
+   // }
 
 
-}
 
 
 
-}
+
+
+
+
+

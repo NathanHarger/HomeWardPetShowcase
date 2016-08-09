@@ -43,7 +43,7 @@ void setupUI(QList<AnimalListModel*> models){
         view->engine()->rootContext()->setContextProperty("animalModel", models.at(i));
 
 
-        view->setSource(QUrl("qrc:/shelterview.qml"));
+        view->setSource(QUrl("qrc:/main.qml"));
 
         w->addTab( view,models.at(i)->getModelName());
     }

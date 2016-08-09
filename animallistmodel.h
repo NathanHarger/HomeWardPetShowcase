@@ -14,8 +14,11 @@ public:
     enum AnimalRoles {
         ImageRole = Qt::UserRole + 1,
         NameRole,
-        DescriptionRole
+        DescriptionRole,
     };
+
+
+
 
     void setModelName(QString);
      QString getModelName() const;
