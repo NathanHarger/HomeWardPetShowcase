@@ -8,7 +8,8 @@ void ApiManager::populateModel(ModelManager* modelManager, QString shelter, QStr
 
     this->modelManager = modelManager;
 
-    if (!networkConfM.isOnline())
+
+    if (networkConfM.isOnline())
     {
         manager = new QNetworkAccessManager(this);
         connect(manager, SIGNAL(finished(QNetworkReply*)),
@@ -18,21 +19,22 @@ void ApiManager::populateModel(ModelManager* modelManager, QString shelter, QStr
         manager->get(QNetworkRequest(QUrl(apiUrl)));
 
     } else {
+
         // if there is no internet
         QFile file(QCoreApplication::applicationDirPath() +     "petJson");
 
         file.open(file.ReadOnly);
-        QDataStream in(&file);   // we will serialize the data into the file
-
-        QString binaryRep = in.device()->readAll();
+        QTextStream in(&file);   // we will serialize the data into the file
 
 
-        qDebug() << binaryRep;
-        //QJsonDocument save = QJsonDocument::fromBinaryData(binaryRep);
-       // QJsonArray oldPets = save.array();
-       //this->createAnimals(oldPets);
+        QString binaryRep = in.readAll();
+
+
+
+        QJsonDocument save = QJsonDocument::fromJson(binaryRep.toUtf8());// QJsonDocument::fromBinaryData(binaryRep, QJsonDocument::BypassValidation);
+        QJsonArray oldPets = save.array();
+        this->createAnimals(oldPets);
     }
-
 
 }
 void ApiManager::downloadFinished(QNetworkReply *reply) //this slot called when we have responce
@@ -45,13 +47,14 @@ void ApiManager::downloadFinished(QNetworkReply *reply) //this slot called when 
     QJsonArray petJson = parseJSON(jsonDoc , modelManager);
     createAnimals(petJson);
     QJsonDocument save(petJson);
-    QByteArray binaryRepresentation = save.toBinaryData();
+    QByteArray binaryRepresentation = save.toJson();
 
+    this->file = binaryRepresentation;
 
     QFile file(QCoreApplication::applicationDirPath() +     "petJson");
     file.open(QIODevice::WriteOnly);
-    QDataStream out(&file);
-    out.writeBytes(binaryRepresentation, binaryRepresentation.size());
+    QTextStream out(&file);
+    out << binaryRepresentation;
 
 
 }

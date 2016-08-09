@@ -2,48 +2,45 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 
 
+
+
 Rectangle{
 
+    GridView{
+        width: 1000; height:1000;
+        id:grid
+       cellWidth:300; cellHeight:300
 
-    Rectangle{
-        id: grid
 
-        Grid {
-        anchors.fill:parent
 
-        columns: 3; spacing: 10
-        focus: true
-        Repeater{
+       // orientation: ListView.Horizontal
+        model:animalModel
+        delegate: Rectangle
+       {
 
-            id: model
-            model:animalModel
-            delegate: appDelegate
+        Image {
+
+                anchors.centerIn:Image.AlignHCenter
+                width:grid.cellWidth; height:grid.cellHeight -15
+
+                fillMode: Image.PreserveAspectFit
+
+                source: image
+
+        }
+                Text{ y: grid.cellHeight -15
+                    text: name }
 
 
         }
-    }
-    Component
-    {
-        id: appDelegate
-
-        Item {
-            id: item
-
-                width: 250; height: 260
-
-                Image {
-            fillMode: Image.PreserveAspectFit
-                    source: image
-                    width: 250; height: 250
-                }
-                Text {
-                    y: 250;
-                    text: name
-                }
 
 
-            }
-        }
+
+
+
+
 }
-    }
 
+
+
+}

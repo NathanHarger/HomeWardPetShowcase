@@ -29,6 +29,7 @@
     QStringList getPhotosFromJson(QJsonObject);
     QStringList getOptionsFromJson(QJsonObject);
     QStringList getBreedsFromJson(QJsonObject);
+    QByteArray file;
    Q_OBJECT
 
 
