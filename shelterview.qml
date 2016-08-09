@@ -23,7 +23,7 @@ import QtQuick.Controls 1.4
 
         Image {
 
-                width:mainView.cellWidth; height:mainView.cellHeight -15
+                width:mainView.cellWidth; height:mainView.cellHeight -20
 
                 fillMode: Image.PreserveAspectFit
 
@@ -31,7 +31,7 @@ import QtQuick.Controls 1.4
 
         }
                 Text{
-                    y: 300 -15
+                    y: mainView.cellHeight -20
                     text: name }
 
 
