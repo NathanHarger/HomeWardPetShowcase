@@ -5,6 +5,7 @@
 #include <QtNetwork>
 #include <QJsonDocument>
 #include "animallistmodel.h"
+#include "shelter.h"
 #include "modelmanager.h"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -15,14 +16,19 @@
  class ApiManager: public QObject
 {
  public:
-      void populateModel(ModelManager* , QString, QString);
+      void populateAnimalModel(ModelManager* , QString, QString);
      QNetworkAccessManager *manager;
+     void populateShelterModel(Shelter*, QString, QString);
  private slots:
 
-   void downloadFinished(QNetworkReply*);
+   void petsGetFinished(QNetworkReply*);
+   void shelterGetFinished(QNetworkReply*);
    private:
     ModelManager* modelManager;
+    Shelter* s;
 
+    //variable used to store data read from api call
+    QByteArray jsonDoc;
     QString getJsonAttribute(QString, QJsonObject);
     QJsonArray parseJSON(QByteArray, ModelManager*);
     void createAnimals(QJsonArray);

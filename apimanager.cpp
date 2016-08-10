@@ -1,7 +1,18 @@
 #include "apimanager.h"
 
 
-void ApiManager::populateModel(ModelManager* modelManager, QString shelter, QString devKey)
+void ApiManager::populateShelterModel(Shelter* sm, QString shelter, QString devKey)
+{
+    this->s = sm;
+
+    manager = new QNetworkAccessManager(this);
+    connect(manager,SIGNAL(finished(QNetworkReply*)),this, SLOT(shelterGetFinished(QNetworkReply*)));
+
+    QString apiUrl = "http://api.petfinder.com/shelter.get?key=" + devKey + "&id=" + shelter + "&format=json";
+    manager->get(QNetworkRequest(QUrl(apiUrl)));
+}
+
+void ApiManager::populateAnimalModel(ModelManager* modelManager, QString shelter, QString devKey)
 {
     QNetworkConfigurationManager networkConfM;
 
@@ -13,8 +24,7 @@ void ApiManager::populateModel(ModelManager* modelManager, QString shelter, QStr
     {
         manager = new QNetworkAccessManager(this);
         connect(manager, SIGNAL(finished(QNetworkReply*)),
-                 this, SLOT(downloadFinished(QNetworkReply*)));
-
+                 this, SLOT(petsGetFinished(QNetworkReply*)));
         QString apiUrl = "http://api.petfinder.com/shelter.getPets?key=" + devKey + "&id=" + shelter + "&format=json";
         manager->get(QNetworkRequest(QUrl(apiUrl)));
 
@@ -37,7 +47,32 @@ void ApiManager::populateModel(ModelManager* modelManager, QString shelter, QStr
     }
 
 }
-void ApiManager::downloadFinished(QNetworkReply *reply) //this slot called when we have responce
+
+void ApiManager::shelterGetFinished(QNetworkReply *reply) //this slot called when we have responce
+{
+    QByteArray json = reply->readAll();
+    QJsonDocument jsonDoc =  QJsonDocument::fromJson(json);
+    QJsonObject doc = jsonDoc.object();
+    QJsonObject petFinder = doc.find("petfinder").value().toObject();
+    QJsonObject shelter = petFinder.find("shelter").value().toObject();
+    s->setName(getJsonAttribute("name", shelter));
+    s->setEmail( getJsonAttribute("email", shelter));
+   s->setPhoneNumber(getJsonAttribute("phone", shelter));
+
+
+    QString address1 = getJsonAttribute("address1", shelter);
+    QString city = getJsonAttribute("city", shelter);
+    QString state  =  getJsonAttribute("state", shelter);
+
+    QString zip = getJsonAttribute("zip", shelter);
+
+    QString fullAddress = address1 + city +state + zip;
+    s->setAddress(fullAddress);
+
+
+}
+
+void ApiManager::petsGetFinished(QNetworkReply *reply) //this slot called when we have responce
 {
 
     QByteArray jsonDoc = reply->readAll(); //we read result and print it(also you can save it in some variable and use in code

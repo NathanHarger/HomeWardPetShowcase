@@ -13,7 +13,7 @@
 #include <QtQuick/qquickview.h>
 #include <QQuickWidget>
 
-void setupUI(QList<AnimalListModel*> models);
+void setupUI(QList<AnimalListModel*> models, Shelter* s);
 
 
 int main(int argc, char *argv[])
@@ -24,16 +24,25 @@ int main(int argc, char *argv[])
     // setup configuration
     Configuration c;
    ModelManager* models = new ModelManager(c.getAnimalTypes());
+   Shelter* s = new Shelter();
     ApiManager am;
-    setupUI(models->getModels());
-     am.populateModel(models, c.getShelterID(), c.getDevKey());
+
+    am.populateShelterModel(s, c.getShelterID(), c.getDevKey());
+
+     am.populateAnimalModel(models, c.getShelterID(), c.getDevKey());
+     setupUI(models->getModels(), s);
 
     return app.exec();
    }
 
 
-void setupUI(QList<AnimalListModel*> models){
+void setupUI(QList<AnimalListModel*> models, Shelter* s){
    QTabWidget* w = new QTabWidget();
+
+   QQuickWidget* aboutView = new QQuickWidget();
+   aboutView->engine()->rootContext()->setContextProperty("shelterModel", s);
+  aboutView->setSource(QUrl("qrc:/aboutShelter.qml"));
+   w->addTab(aboutView, "Shelter");
 
     for (int i =0 ; i < models.length(); i++){
 

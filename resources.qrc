@@ -4,5 +4,6 @@
         <file>settings.txt</file>
         <file>animalview.qml</file>
         <file>main.qml</file>
+        <file>aboutShelter.qml</file>
     </qresource>
 </RCC>

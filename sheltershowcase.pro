@@ -21,14 +21,16 @@ SOURCES +=animal.cpp \
     main.cpp \
     mainwindow.cpp \
     animallistmodel.cpp \
-    modelmanager.cpp
+    modelmanager.cpp \
+    shelter.cpp
 
 HEADERS  += animal.h \
     apimanager.h \
     configuration.h \
     mainwindow.h \
     animallistmodel.h \
-    modelmanager.h
+    modelmanager.h \
+    shelter.h
 
 FORMS
 

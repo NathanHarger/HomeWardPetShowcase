@@ -14,7 +14,7 @@ import QtQuick.Controls 1.4
             onClicked: {
 
                 mainLoader.source="animalview.qml"
-                animalModel = index;
+               // animalModel = index;
             }
 
 

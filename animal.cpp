@@ -1,5 +1,4 @@
 #include "animal.h"
-#include <QApplication>
 Animal::Animal(QString name)
 {
 
