@@ -27,6 +27,12 @@
         return name;
     }
 
+    QStringList Shelter::getQStringList()
+    {
+        QStringList result;
+        result << this->name << this->address << this->phoneNumber << this->email;
+        return result;
+    }
 
 
 

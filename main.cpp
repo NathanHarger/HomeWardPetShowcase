@@ -33,15 +33,15 @@ int main(int argc, char *argv[])
 
      am.populateAnimalModel(models, c.getShelterID(), c.getDevKey());
      am.populateShelterModel(s, c.getShelterID(), c.getDevKey());
-     qDebug() << s->getEmail();
+     //qDebug() << s->getEmail();
 
      setupUI(models->getModels(), s);
      QTextStream out(stderr);
 
      // following line returns ""
-     qDebug() << s->getName();
+    // qDebug() << s->getName();
 
-    qDebug() << s->getAddress();
+   // qDebug() << s->getAddress();
 
     return app.exec();
    }
@@ -51,7 +51,7 @@ void setupUI(QList<AnimalListModel*> models, Shelter* s){
    QTabWidget* w = new QTabWidget();
 
    QQuickWidget* aboutView = new QQuickWidget();
-   //aboutView->engine()->rootContext()->setContextProperty("shelterModel", s);
+   aboutView->engine()->rootContext()->setContextProperty("shelterModel", s->getQStringList());
   aboutView->setSource(QUrl("qrc:/aboutShelter.qml"));
    w->addTab(aboutView, "Shelter");
 

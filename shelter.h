@@ -12,6 +12,7 @@ public:
     QString getEmail();
     QString getAddress();
     QString getName();
+    QStringList getQStringList();
     enum ShelterRoles
     {
         NameRole = Qt::UserRole +1,
