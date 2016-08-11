@@ -4,12 +4,16 @@
 void ApiManager::populateShelterModel(Shelter* sm, QString shelter, QString devKey)
 {
     this->s = sm;
+    s->setAddress("testt");
+
 
     manager = new QNetworkAccessManager(this);
     connect(manager,SIGNAL(finished(QNetworkReply*)),this, SLOT(shelterGetFinished(QNetworkReply*)));
 
     QString apiUrl = "http://api.petfinder.com/shelter.get?key=" + devKey + "&id=" + shelter + "&format=json";
     manager->get(QNetworkRequest(QUrl(apiUrl)));
+
+    loop.exec();
 }
 
 void ApiManager::populateAnimalModel(ModelManager* modelManager, QString shelter, QString devKey)
@@ -55,7 +59,12 @@ void ApiManager::shelterGetFinished(QNetworkReply *reply) //this slot called whe
     QJsonObject doc = jsonDoc.object();
     QJsonObject petFinder = doc.find("petfinder").value().toObject();
     QJsonObject shelter = petFinder.find("shelter").value().toObject();
-    s->setName(getJsonAttribute("name", shelter));
+
+    QString name = getJsonAttribute("name", shelter);
+
+    //this line throws sig
+    s->setName(name);
+
     s->setEmail( getJsonAttribute("email", shelter));
    s->setPhoneNumber(getJsonAttribute("phone", shelter));
 
@@ -68,7 +77,7 @@ void ApiManager::shelterGetFinished(QNetworkReply *reply) //this slot called whe
 
     QString fullAddress = address1 + city +state + zip;
     s->setAddress(fullAddress);
-
+    loop.exit();
 
 }
 
@@ -76,7 +85,6 @@ void ApiManager::petsGetFinished(QNetworkReply *reply) //this slot called when w
 {
 
     QByteArray jsonDoc = reply->readAll(); //we read result and print it(also you can save it in some variable and use in code
-   // qDebug() << json;
 
 
     QJsonArray petJson = parseJSON(jsonDoc , modelManager);

@@ -12,6 +12,9 @@
 #include <QtQuick/qquickitem.h>
 #include <QtQuick/qquickview.h>
 #include <QQuickWidget>
+#include <iostream>
+#include <QTextStream>
+using namespace std;
 
 void setupUI(QList<AnimalListModel*> models, Shelter* s);
 
@@ -27,10 +30,18 @@ int main(int argc, char *argv[])
    Shelter* s = new Shelter();
     ApiManager am;
 
-    am.populateShelterModel(s, c.getShelterID(), c.getDevKey());
 
      am.populateAnimalModel(models, c.getShelterID(), c.getDevKey());
+     am.populateShelterModel(s, c.getShelterID(), c.getDevKey());
+     qDebug() << s->getEmail();
+
      setupUI(models->getModels(), s);
+     QTextStream out(stderr);
+
+     // following line returns ""
+     qDebug() << s->getName();
+
+    qDebug() << s->getAddress();
 
     return app.exec();
    }
@@ -40,7 +51,7 @@ void setupUI(QList<AnimalListModel*> models, Shelter* s){
    QTabWidget* w = new QTabWidget();
 
    QQuickWidget* aboutView = new QQuickWidget();
-   aboutView->engine()->rootContext()->setContextProperty("shelterModel", s);
+   //aboutView->engine()->rootContext()->setContextProperty("shelterModel", s);
   aboutView->setSource(QUrl("qrc:/aboutShelter.qml"));
    w->addTab(aboutView, "Shelter");
 

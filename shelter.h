@@ -1,8 +1,9 @@
 #include <QApplication>
 #include <QAbstractListModel>
+#include <QDebug>
 
 
-class Shelter : public QAbstractListModel
+class Shelter //: public QAbstractListModel
 {
 
 public:
@@ -10,7 +11,7 @@ public:
     QString getPhoneNumber();
     QString getEmail();
     QString getAddress();
-    QStringList getStringModel();
+    QString getName();
     enum ShelterRoles
     {
         NameRole = Qt::UserRole +1,
@@ -18,8 +19,8 @@ public:
         EmailRole,
         PhoneRole
     };
-    int rowCount(const QModelIndex &parent=QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
+   // int rowCount(const QModelIndex &parent=QModelIndex()) const;
+   // QVariant data(const QModelIndex &index, int role) const;
 
     void setPhoneNumber(QString);
     void setEmail(QString);
@@ -27,7 +28,7 @@ public:
     void setDesc(QString);
     void setName(QString);
 protected:
-    QHash<int, QByteArray> roleNames() const;
+   // QHash<int, QByteArray> roleNames() const;
 
 
 private:

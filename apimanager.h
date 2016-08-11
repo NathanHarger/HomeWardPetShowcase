@@ -26,6 +26,8 @@
    private:
     ModelManager* modelManager;
     Shelter* s;
+    QEventLoop loop;
+
 
     //variable used to store data read from api call
     QByteArray jsonDoc;
