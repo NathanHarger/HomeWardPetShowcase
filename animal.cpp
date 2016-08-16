@@ -20,6 +20,14 @@ QString Animal::getImage() const{
         return "";
 }
 
+QStringList Animal::getStringList()
+{
+    QStringList result;
+    result << this->getImage() << this->getDesc();
+    return result;
+}
+
+
 
 QString Animal::getDesc() const{
     return this->animalDescription;

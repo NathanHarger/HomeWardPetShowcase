@@ -3,7 +3,7 @@
 #include<string>
 #include <list>
 #include <QApplication>
-class Animal{
+class Animal {
 public:
 
   Animal();
@@ -24,6 +24,7 @@ QString getName() const;
    void setMix(QString);
    void setType(QString);
     Animal(QString name);
+    QStringList getStringList();
 private:
 
     QString shelterId;

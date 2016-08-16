@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
      // following line returns ""
     // qDebug() << s->getName();
 
-   // qDebug() << s->getAddress();
+    qDebug() << s->getAddress();
 
     return app.exec();
    }
@@ -61,9 +61,10 @@ void setupUI(QList<AnimalListModel*> models, Shelter* s){
 
         // add list of animals from config to qml animalTypes property
         view->engine()->rootContext()->setContextProperty("animalModel", models.at(i));
+        view->engine()->rootContext()->setContextProperty("animal", QStringList());
 
 
-        view->setSource(QUrl("qrc:/main.qml"));
+        view->setSource(QUrl("qrc:/shelterview.qml"));
 
         w->addTab( view,models.at(i)->getModelName());
     }

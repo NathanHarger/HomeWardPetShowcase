@@ -14,10 +14,12 @@ public:
     enum AnimalRoles {
         ImageRole = Qt::UserRole + 1,
         NameRole,
-        DescriptionRole
+        DescriptionRole,
+        AnimalRole
     };
 
 
+    Q_INVOKABLE QObject* getAnimal(const int row);
 
 
     void setModelName(QString);
@@ -26,6 +28,8 @@ public:
     void addAnimal(const Animal &animal);
     int rowCount(const QModelIndex &parent=QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
+
+    QString getQmlObject(const QModelIndex) const;
 protected:
     QHash<int, QByteArray> roleNames() const;
 
